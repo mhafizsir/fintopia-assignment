@@ -1,9 +1,0 @@
-com/example/schema/InventoryEvent.class
-com/example/inventoryservice/controller/InventoryController.class
-com/example/inventoryservice/kafka/InventoryEventConsumer.class
-com/example/inventoryservice/repository/InventoryRepository.class
-com/example/schema/InventoryEvent$Builder.class
-com/example/inventoryservice/model/Inventory.class
-com/example/schema/OrderEvent.class
-com/example/schema/OrderEvent$Builder.class
-com/example/inventoryservice/InventoryServiceApplication.class
