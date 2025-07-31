@@ -1,0 +1,7 @@
+/home/mhafizsir/Codes/fintopia-assignment/assignment3/inventory-service/target/generated-sources/avro/com/example/schema/OrderEvent.java
+/home/mhafizsir/Codes/fintopia-assignment/assignment3/inventory-service/src/main/java/com/example/inventoryservice/InventoryServiceApplication.java
+/home/mhafizsir/Codes/fintopia-assignment/assignment3/inventory-service/src/main/java/com/example/inventoryservice/model/Inventory.java
+/home/mhafizsir/Codes/fintopia-assignment/assignment3/inventory-service/src/main/java/com/example/inventoryservice/repository/InventoryRepository.java
+/home/mhafizsir/Codes/fintopia-assignment/assignment3/inventory-service/src/main/java/com/example/inventoryservice/kafka/InventoryEventConsumer.java
+/home/mhafizsir/Codes/fintopia-assignment/assignment3/inventory-service/src/main/java/com/example/inventoryservice/controller/InventoryController.java
+/home/mhafizsir/Codes/fintopia-assignment/assignment3/inventory-service/target/generated-sources/avro/com/example/schema/InventoryEvent.java

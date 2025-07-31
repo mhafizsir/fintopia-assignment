@@ -1,0 +1,229 @@
+version: '3.7'
+
+services:
+  zookeeper1:
+    image: confluentinc/cp-zookeeper:7.0.0
+    hostname: zookeeper1
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_SERVER_ID: 1
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+      ZOOKEEPER_INIT_LIMIT: 5
+      ZOOKEEPER_SYNC_LIMIT: 2
+      ZOOKEEPER_SERVERS: "zookeeper1:2888:3888;zookeeper2:2888:3888;zookeeper3:2888:3888"
+    volumes:
+      - zookeeper1-data:/var/lib/zookeeper/data
+      - zookeeper1-logs:/var/lib/zookeeper/log
+    networks:
+      - kafka-net
+    restart: unless-stopped
+
+  zookeeper2:
+    image: confluentinc/cp-zookeeper:7.0.0
+    hostname: zookeeper2
+    ports:
+      - "2182:2181"
+    environment:
+      ZOOKEEPER_SERVER_ID: 2
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+      ZOOKEEPER_INIT_LIMIT: 5
+      ZOOKEEPER_SYNC_LIMIT: 2
+      ZOOKEEPER_SERVERS: "zookeeper1:2888:3888;zookeeper2:2888:3888;zookeeper3:2888:3888"
+    volumes:
+      - zookeeper2-data:/var/lib/zookeeper/data
+      - zookeeper2-logs:/var/lib/zookeeper/log
+    networks:
+      - kafka-net
+    restart: unless-stopped
+
+  zookeeper3:
+    image: confluentinc/cp-zookeeper:7.0.0
+    hostname: zookeeper3
+    ports:
+      - "2183:2181"
+    environment:
+      ZOOKEEPER_SERVER_ID: 3
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+      ZOOKEEPER_INIT_LIMIT: 5
+      ZOOKEEPER_SYNC_LIMIT: 2
+      ZOOKEEPER_SERVERS: "zookeeper1:2888:3888;zookeeper2:2888:3888;zookeeper3:2888:3888"
+    volumes:
+      - zookeeper3-data:/var/lib/zookeeper/data
+      - zookeeper3-logs:/var/lib/zookeeper/log
+    networks:
+      - kafka-net
+    restart: unless-stopped
+
+  kafka1:
+    image: confluentinc/cp-kafka:7.0.0
+    hostname: kafka1
+    ports:
+      - "9093:9093"
+      - "9991:9991"
+    depends_on:
+      - zookeeper1
+      - zookeeper2
+      - zookeeper3
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper1:2181,zookeeper2:2181,zookeeper3:2181"
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: SSL:SSL,INTERNAL:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: SSL://kafka1:9093,INTERNAL://kafka1:29092
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_SSL_KEYSTORE_LOCATION: /etc/kafka/secrets/kafka1.keystore.jks
+      KAFKA_SSL_KEYSTORE_PASSWORD: kafkapass
+      KAFKA_SSL_KEY_PASSWORD: kafkapass
+      KAFKA_SSL_TRUSTSTORE_LOCATION: /etc/kafka/secrets/kafka.truststore.jks
+      KAFKA_SSL_TRUSTSTORE_PASSWORD: kafkapass
+      KAFKA_SSL_CLIENT_AUTH: required
+      KAFKA_AUTHORIZER_CLASS_NAME: kafka.security.authorizer.AclAuthorizer
+      KAFKA_SUPER_USERS: User:admin
+      KAFKA_ALLOW_EVERYONE_IF_NO_ACL_FOUND: "false"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 3
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 2
+      KAFKA_DEFAULT_REPLICATION_FACTOR: 3
+      KAFKA_MIN_INSYNC_REPLICAS: 2
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_JMX_PORT: 9991
+      KAFKA_JMX_HOSTNAME: kafka1
+    volumes:
+      - ./ssl-bonus/ssl:/etc/kafka/secrets
+      - kafka1-data:/var/lib/kafka/data
+    networks:
+      - kafka-net
+    restart: unless-stopped
+
+  kafka2:
+    image: confluentinc/cp-kafka:7.0.0
+    hostname: kafka2
+    ports:
+      - "9094:9094"
+      - "9992:9992"
+    depends_on:
+      - zookeeper1
+      - zookeeper2
+      - zookeeper3
+    environment:
+      KAFKA_BROKER_ID: 2
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper1:2181,zookeeper2:2181,zookeeper3:2181"
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: SSL:SSL,INTERNAL:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: SSL://kafka2:9094,INTERNAL://kafka2:29092
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_SSL_KEYSTORE_LOCATION: /etc/kafka/secrets/kafka2.keystore.jks
+      KAFKA_SSL_KEYSTORE_PASSWORD: kafkapass
+      KAFKA_SSL_KEY_PASSWORD: kafkapass
+      KAFKA_SSL_TRUSTSTORE_LOCATION: /etc/kafka/secrets/kafka.truststore.jks
+      KAFKA_SSL_TRUSTSTORE_PASSWORD: kafkapass
+      KAFKA_SSL_CLIENT_AUTH: required
+      KAFKA_AUTHORIZER_CLASS_NAME: kafka.security.authorizer.AclAuthorizer
+      KAFKA_SUPER_USERS: User:admin
+      KAFKA_ALLOW_EVERYONE_IF_NO_ACL_FOUND: "false"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 3
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 2
+      KAFKA_DEFAULT_REPLICATION_FACTOR: 3
+      KAFKA_MIN_INSYNC_REPLICAS: 2
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_JMX_PORT: 9992
+      KAFKA_JMX_HOSTNAME: kafka2
+    volumes:
+      - ./ssl-bonus/ssl:/etc/kafka/secrets
+      - kafka2-data:/var/lib/kafka/data
+    networks:
+      - kafka-net
+    restart: unless-stopped
+
+  kafka3:
+    image: confluentinc/cp-kafka:7.0.0
+    hostname: kafka3
+    ports:
+      - "9095:9095"
+      - "9993:9993"
+    depends_on:
+      - zookeeper1
+      - zookeeper2
+      - zookeeper3
+    environment:
+      KAFKA_BROKER_ID: 3
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper1:2181,zookeeper2:2181,zookeeper3:2181"
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: SSL:SSL,INTERNAL:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: SSL://kafka3:9095,INTERNAL://kafka3:29092
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_SSL_KEYSTORE_LOCATION: /etc/kafka/secrets/kafka3.keystore.jks
+      KAFKA_SSL_KEYSTORE_PASSWORD: kafkapass
+      KAFKA_SSL_KEY_PASSWORD: kafkapass
+      KAFKA_SSL_TRUSTSTORE_LOCATION: /etc/kafka/secrets/kafka.truststore.jks
+      KAFKA_SSL_TRUSTSTORE_PASSWORD: kafkapass
+      KAFKA_SSL_CLIENT_AUTH: required
+      KAFKA_AUTHORIZER_CLASS_NAME: kafka.security.authorizer.AclAuthorizer
+      KAFKA_SUPER_USERS: User:admin
+      KAFKA_ALLOW_EVERYONE_IF_NO_ACL_FOUND: "false"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 3
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 2
+      KAFKA_DEFAULT_REPLICATION_FACTOR: 3
+      KAFKA_MIN_INSYNC_REPLICAS: 2
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_JMX_PORT: 9993
+      KAFKA_JMX_HOSTNAME: kafka3
+    volumes:
+      - ./ssl-bonus/ssl:/etc/kafka/secrets
+      - kafka3-data:/var/lib/kafka/data
+    networks:
+      - kafka-net
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:latest
+    hostname: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ../config/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--web.enable-lifecycle'
+    networks:
+      - kafka-net
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:latest
+    hostname: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ../config/grafana-datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
+    networks:
+      - kafka-net
+    restart: unless-stopped
+
+networks:
+  kafka-net:
+    driver: bridge
+
+volumes:
+  zookeeper1-data:
+  zookeeper1-logs:
+  zookeeper2-data:
+  zookeeper2-logs:
+  zookeeper3-data:
+  zookeeper3-logs:
+  kafka1-data:
+  kafka2-data:
+  kafka3-data:
+  prometheus-data:
+  grafana-data:

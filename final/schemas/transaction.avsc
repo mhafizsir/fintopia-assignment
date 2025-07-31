@@ -1,0 +1,25 @@
+{
+  "type": "record",
+  "name": "Transaction",
+  "namespace": "com.ecommerce.avro",
+  "fields": [
+    {"name": "order_id", "type": "string"},
+    {"name": "user_id", "type": "int"},
+    {"name": "amount", "type": "double"},
+    {
+      "name": "status", 
+      "type": {
+        "type": "enum", 
+        "name": "Status", 
+        "symbols": ["PENDING", "SUCCESS", "FAILED"]
+      }
+    },
+    {
+      "name": "timestamp", 
+      "type": {
+        "type": "long", 
+        "logicalType": "timestamp-millis"
+      }
+    }
+  ]
+}

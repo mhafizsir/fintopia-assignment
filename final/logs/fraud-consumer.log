@@ -1,0 +1,228 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.5)
+
+2025-07-31T13:51:08.196+07:00  INFO 2015840 --- [fraud-consumer] [           main] c.e.fraud.FraudConsumerApplication       : Starting FraudConsumerApplication v1.0.0 using Java 21.0.7 with PID 2015840 (/home/mhafizsir/Codes/fintopia-assignment/final/fraud-consumer/target/fraud-consumer-1.0.0.jar started by mhafizsir in /home/mhafizsir/Codes/fintopia-assignment/final/fraud-consumer)
+2025-07-31T13:51:08.197+07:00  INFO 2015840 --- [fraud-consumer] [           main] c.e.fraud.FraudConsumerApplication       : No active profile set, falling back to 1 default profile: "default"
+2025-07-31T13:51:08.716+07:00  INFO 2015840 --- [fraud-consumer] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-31T13:51:08.737+07:00  INFO 2015840 --- [fraud-consumer] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 18 ms. Found 1 JPA repository interface.
+2025-07-31T13:51:09.073+07:00  INFO 2015840 --- [fraud-consumer] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8085 (http)
+2025-07-31T13:51:09.080+07:00  INFO 2015840 --- [fraud-consumer] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-07-31T13:51:09.080+07:00  INFO 2015840 --- [fraud-consumer] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.20]
+2025-07-31T13:51:09.103+07:00  INFO 2015840 --- [fraud-consumer] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-07-31T13:51:09.104+07:00  INFO 2015840 --- [fraud-consumer] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 870 ms
+2025-07-31T13:51:09.284+07:00  INFO 2015840 --- [fraud-consumer] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-31T13:51:09.311+07:00  INFO 2015840 --- [fraud-consumer] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-07-31T13:51:09.325+07:00  INFO 2015840 --- [fraud-consumer] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-07-31T13:51:09.412+07:00  INFO 2015840 --- [fraud-consumer] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-31T13:51:09.424+07:00  INFO 2015840 --- [fraud-consumer] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-07-31T13:51:09.569+07:00  INFO 2015840 --- [fraud-consumer] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@13137835
+2025-07-31T13:51:09.570+07:00  INFO 2015840 --- [fraud-consumer] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-07-31T13:51:09.592+07:00  WARN 2015840 --- [fraud-consumer] [           main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-07-31T13:51:09.943+07:00  INFO 2015840 --- [fraud-consumer] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-31T13:51:09.972+07:00  INFO 2015840 --- [fraud-consumer] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-31T13:51:10.167+07:00  WARN 2015840 --- [fraud-consumer] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-31T13:51:10.503+07:00  INFO 2015840 --- [fraud-consumer] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoint(s) beneath base path '/actuator'
+2025-07-31T13:51:10.557+07:00  INFO 2015840 --- [fraud-consumer] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8085 (http) with context path ''
+2025-07-31T13:51:10.628+07:00  INFO 2015840 --- [fraud-consumer] [           main] i.c.k.s.KafkaAvroDeserializerConfig      : KafkaAvroDeserializerConfig values: 
+	auto.register.schemas = true
+	avro.reflection.allow.null = false
+	avro.use.logical.type.converters = false
+	basic.auth.credentials.source = URL
+	basic.auth.user.info = [hidden]
+	bearer.auth.cache.expiry.buffer.seconds = 300
+	bearer.auth.client.id = null
+	bearer.auth.client.secret = null
+	bearer.auth.credentials.source = STATIC_TOKEN
+	bearer.auth.identity.pool.id = null
+	bearer.auth.issuer.endpoint.url = null
+	bearer.auth.logical.cluster = null
+	bearer.auth.scope = null
+	bearer.auth.scope.claim.name = scope
+	bearer.auth.sub.claim.name = sub
+	bearer.auth.token = [hidden]
+	context.name.strategy = class io.confluent.kafka.serializers.context.NullContextNameStrategy
+	id.compatibility.strict = true
+	key.subject.name.strategy = class io.confluent.kafka.serializers.subject.TopicNameStrategy
+	latest.cache.size = 1000
+	latest.cache.ttl.sec = -1
+	latest.compatibility.strict = true
+	max.schemas.per.subject = 1000
+	normalize.schemas = false
+	proxy.host = 
+	proxy.port = -1
+	rule.actions = []
+	rule.executors = []
+	schema.format = null
+	schema.reflection = false
+	schema.registry.basic.auth.user.info = [hidden]
+	schema.registry.ssl.cipher.suites = null
+	schema.registry.ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	schema.registry.ssl.endpoint.identification.algorithm = https
+	schema.registry.ssl.engine.factory.class = null
+	schema.registry.ssl.key.password = null
+	schema.registry.ssl.keymanager.algorithm = SunX509
+	schema.registry.ssl.keystore.certificate.chain = null
+	schema.registry.ssl.keystore.key = null
+	schema.registry.ssl.keystore.location = null
+	schema.registry.ssl.keystore.password = null
+	schema.registry.ssl.keystore.type = JKS
+	schema.registry.ssl.protocol = TLSv1.3
+	schema.registry.ssl.provider = null
+	schema.registry.ssl.secure.random.implementation = null
+	schema.registry.ssl.trustmanager.algorithm = PKIX
+	schema.registry.ssl.truststore.certificates = null
+	schema.registry.ssl.truststore.location = null
+	schema.registry.ssl.truststore.password = null
+	schema.registry.ssl.truststore.type = JKS
+	schema.registry.url = [http://localhost:8081]
+	specific.avro.key.type = null
+	specific.avro.reader = true
+	specific.avro.value.type = null
+	use.latest.version = false
+	use.latest.with.metadata = null
+	use.schema.id = -1
+	value.subject.name.strategy = class io.confluent.kafka.serializers.subject.TopicNameStrategy
+
+2025-07-31T13:51:10.651+07:00  INFO 2015840 --- [fraud-consumer] [           main] i.c.k.s.KafkaAvroDeserializerConfig      : KafkaAvroDeserializerConfig values: 
+	auto.register.schemas = true
+	avro.reflection.allow.null = false
+	avro.use.logical.type.converters = false
+	basic.auth.credentials.source = URL
+	basic.auth.user.info = [hidden]
+	bearer.auth.cache.expiry.buffer.seconds = 300
+	bearer.auth.client.id = null
+	bearer.auth.client.secret = null
+	bearer.auth.credentials.source = STATIC_TOKEN
+	bearer.auth.identity.pool.id = null
+	bearer.auth.issuer.endpoint.url = null
+	bearer.auth.logical.cluster = null
+	bearer.auth.scope = null
+	bearer.auth.scope.claim.name = scope
+	bearer.auth.sub.claim.name = sub
+	bearer.auth.token = [hidden]
+	context.name.strategy = class io.confluent.kafka.serializers.context.NullContextNameStrategy
+	id.compatibility.strict = true
+	key.subject.name.strategy = class io.confluent.kafka.serializers.subject.TopicNameStrategy
+	latest.cache.size = 1000
+	latest.cache.ttl.sec = -1
+	latest.compatibility.strict = true
+	max.schemas.per.subject = 1000
+	normalize.schemas = false
+	proxy.host = 
+	proxy.port = -1
+	rule.actions = []
+	rule.executors = []
+	schema.format = null
+	schema.reflection = false
+	schema.registry.basic.auth.user.info = [hidden]
+	schema.registry.ssl.cipher.suites = null
+	schema.registry.ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	schema.registry.ssl.endpoint.identification.algorithm = https
+	schema.registry.ssl.engine.factory.class = null
+	schema.registry.ssl.key.password = null
+	schema.registry.ssl.keymanager.algorithm = SunX509
+	schema.registry.ssl.keystore.certificate.chain = null
+	schema.registry.ssl.keystore.key = null
+	schema.registry.ssl.keystore.location = null
+	schema.registry.ssl.keystore.password = null
+	schema.registry.ssl.keystore.type = JKS
+	schema.registry.ssl.protocol = TLSv1.3
+	schema.registry.ssl.provider = null
+	schema.registry.ssl.secure.random.implementation = null
+	schema.registry.ssl.trustmanager.algorithm = PKIX
+	schema.registry.ssl.truststore.certificates = null
+	schema.registry.ssl.truststore.location = null
+	schema.registry.ssl.truststore.password = null
+	schema.registry.ssl.truststore.type = JKS
+	schema.registry.url = [http://localhost:8081]
+	specific.avro.key.type = null
+	specific.avro.reader = true
+	specific.avro.value.type = null
+	use.latest.version = false
+	use.latest.with.metadata = null
+	use.schema.id = -1
+	value.subject.name.strategy = class io.confluent.kafka.serializers.subject.TopicNameStrategy
+
+2025-07-31T13:51:10.686+07:00  INFO 2015840 --- [fraud-consumer] [           main] fkaConsumerFactory$ExtendedKafkaConsumer : [Consumer clientId=consumer-fraud-detection-group-1, groupId=fraud-detection-group] Subscribed to topic(s): transactions
+2025-07-31T13:51:10.696+07:00  INFO 2015840 --- [fraud-consumer] [           main] c.e.fraud.FraudConsumerApplication       : Started FraudConsumerApplication in 2.731 seconds (process running for 2.949)
+2025-07-31T13:51:13.860+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : fraud-detection-group: partitions assigned: [transactions-0]
+2025-07-31T13:51:27.401+07:00  INFO 2015840 --- [fraud-consumer] [nio-8085-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-07-31T13:51:27.401+07:00  INFO 2015840 --- [fraud-consumer] [nio-8085-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-07-31T13:51:27.402+07:00  INFO 2015840 --- [fraud-consumer] [nio-8085-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-07-31T13:51:27.425+07:00  INFO 2015840 --- [fraud-consumer] [nio-8085-exec-1] c.e.fraud.controller.FraudController     : Received request for fraud alerts: status=null, userId=null
+2025-07-31T13:51:33.296+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-71D5BDEB, userId=1010, amount=2036.2707351618367
+2025-07-31T13:51:35.086+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=TEST-003, userId=1003, amount=2.5E7
+2025-07-31T13:51:35.108+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Fraud alert created: alertId=1, orderId=TEST-003, reason=High value transaction exceeds $10M threshold
+2025-07-31T13:51:35.108+07:00  WARN 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : FRAUD ALERT: High value transaction detected - orderId=TEST-003, userId=1003, amount=$2.5E7
+2025-07-31T13:51:40.182+07:00  INFO 2015840 --- [fraud-consumer] [nio-8085-exec-2] c.e.fraud.controller.FraudController     : Received request for fraud alerts: status=null, userId=null
+2025-07-31T13:52:03.201+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-E31855D1, userId=1004, amount=8386.29278259325
+2025-07-31T13:52:05.095+07:00  INFO 2015840 --- [fraud-consumer] [nio-8085-exec-4] c.e.fraud.controller.FraudController     : Received update request for fraud alert: id=1, update={investigationStatus=UNDER_REVIEW}
+2025-07-31T13:52:05.108+07:00  INFO 2015840 --- [fraud-consumer] [nio-8085-exec-4] c.e.fraud.controller.FraudController     : Updated fraud alert: id=1, newStatus=UNDER_REVIEW
+2025-07-31T13:52:33.205+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-DEDD0145, userId=1009, amount=8794.058922497125
+2025-07-31T13:53:03.210+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-5CDAE80F, userId=1006, amount=2447.7601673369454
+2025-07-31T13:53:33.215+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-1EE9D237, userId=1004, amount=7234.5947802424525
+2025-07-31T13:54:03.220+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-6F00A79E, userId=1001, amount=2823.2472033601957
+2025-07-31T13:54:33.226+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-91ABE15C, userId=1002, amount=7283.173199514438
+2025-07-31T13:55:03.231+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-76A60334, userId=1003, amount=2874.205381068029
+2025-07-31T13:55:33.235+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-C440D73F, userId=1001, amount=1402.379555263129
+2025-07-31T13:56:03.241+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-908D7C4A, userId=1010, amount=1043.2293755907954
+2025-07-31T13:56:33.246+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-6B9EE86D, userId=1002, amount=4163.869320955655
+2025-07-31T13:57:03.251+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-90FDBB25, userId=1001, amount=4039.01752337907
+2025-07-31T13:57:33.256+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-98BA775B, userId=1006, amount=3540.7757680186683
+2025-07-31T13:58:03.262+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-65AFB197, userId=1009, amount=5375.862410860376
+2025-07-31T13:58:33.266+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-2DEC2295, userId=1003, amount=5632.846235703563
+2025-07-31T13:59:03.271+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-BC8B9477, userId=1007, amount=6464.901582530558
+2025-07-31T13:59:33.275+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-4A9FBE3E, userId=1006, amount=8480.107544871378
+2025-07-31T14:00:03.281+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-0A028AC1, userId=1004, amount=7491.5094519593595
+2025-07-31T14:00:33.286+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-4478E495, userId=1005, amount=5529.523485450577
+2025-07-31T14:01:03.291+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-31F3C168, userId=1007, amount=7811.865810756339
+2025-07-31T14:01:33.296+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-46365B68, userId=1004, amount=9353.386242976583
+2025-07-31T14:02:03.302+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-396769DD, userId=1007, amount=8757.3489811719
+2025-07-31T14:02:33.306+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-6000D3EB, userId=1009, amount=6490.135470047158
+2025-07-31T14:03:03.311+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-EE3BC7A7, userId=1010, amount=1.336011528523555E7
+2025-07-31T14:03:03.316+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Fraud alert created: alertId=2, orderId=ORDER-EE3BC7A7, reason=High value transaction exceeds $10M threshold
+2025-07-31T14:03:03.316+07:00  WARN 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : FRAUD ALERT: High value transaction detected - orderId=ORDER-EE3BC7A7, userId=1010, amount=$1.336011528523555E7
+2025-07-31T14:03:33.318+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-E18060FC, userId=1009, amount=4848.899247626354
+2025-07-31T14:04:03.323+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-FA69284C, userId=1006, amount=8704.259494662112
+2025-07-31T14:04:33.329+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-57412D76, userId=1003, amount=4605.6607358436195
+2025-07-31T14:05:03.336+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-1391A367, userId=1005, amount=2269.886596660089
+2025-07-31T14:05:33.342+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-900DD2EB, userId=1004, amount=8272.866588393039
+2025-07-31T14:06:03.347+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-25BD9284, userId=1002, amount=4100.734026554706
+2025-07-31T14:06:33.355+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-BAA773AA, userId=1002, amount=6618.182630011006
+2025-07-31T14:07:03.360+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-B53C77D7, userId=1005, amount=7117.89202588005
+2025-07-31T14:07:33.366+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-07EB473A, userId=1005, amount=1.4150933659675056E7
+2025-07-31T14:07:33.369+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Fraud alert created: alertId=3, orderId=ORDER-07EB473A, reason=High value transaction exceeds $10M threshold
+2025-07-31T14:07:33.370+07:00  WARN 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : FRAUD ALERT: High value transaction detected - orderId=ORDER-07EB473A, userId=1005, amount=$1.4150933659675056E7
+2025-07-31T14:08:03.373+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-128C71FC, userId=1005, amount=1687.1039367624153
+2025-07-31T14:08:33.379+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-0067F69C, userId=1003, amount=5210.849519994805
+2025-07-31T14:09:03.384+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-594401FE, userId=1010, amount=8006.12040223794
+2025-07-31T14:09:33.390+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-7C1F96AC, userId=1004, amount=3616.566023047615
+2025-07-31T14:10:03.398+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-F54D9EB4, userId=1009, amount=375.7233792688384
+2025-07-31T14:10:33.402+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-E60FF74C, userId=1001, amount=8839.995930272347
+2025-07-31T14:11:03.406+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-4D16CA5C, userId=1010, amount=1.4723414159900924E7
+2025-07-31T14:11:03.410+07:00  INFO 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Fraud alert created: alertId=4, orderId=ORDER-4D16CA5C, reason=High value transaction exceeds $10M threshold
+2025-07-31T14:11:03.410+07:00  WARN 2015840 --- [fraud-consumer] [ntainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : FRAUD ALERT: High value transaction detected - orderId=ORDER-4D16CA5C, userId=1010, amount=$1.4723414159900924E7
+-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-57412D76, userId=1003, amount=4605.6607358436195
+2025-07-31T14:05:03.336+07:00  INFO 2015840 --- [fraud-consumer] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-1391A367, userId=1005, amount=2269.886596660089
+2025-07-31T14:05:33.342+07:00  INFO 2015840 --- [fraud-consumer] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-900DD2EB, userId=1004, amount=8272.866588393039
+2025-07-31T14:06:03.347+07:00  INFO 2015840 --- [fraud-consumer] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-25BD9284, userId=1002, amount=4100.734026554706
+2025-07-31T14:06:33.355+07:00  INFO 2015840 --- [fraud-consumer] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-BAA773AA, userId=1002, amount=6618.182630011006
+2025-07-31T14:07:03.360+07:00  INFO 2015840 --- [fraud-consumer] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-B53C77D7, userId=1005, amount=7117.89202588005
+2025-07-31T14:07:33.366+07:00  INFO 2015840 --- [fraud-consumer] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-07EB473A, userId=1005, amount=1.4150933659675056E7
+2025-07-31T14:07:33.369+07:00  INFO 2015840 --- [fraud-consumer] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Fraud alert created: alertId=3, orderId=ORDER-07EB473A, reason=High value transaction exceeds $10M threshold
+2025-07-31T14:07:33.370+07:00  WARN 2015840 --- [fraud-consumer] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : FRAUD ALERT: High value transaction detected - orderId=ORDER-07EB473A, userId=1005, amount=$1.4150933659675056E7
+2025-07-31T14:08:03.373+07:00  INFO 2015840 --- [fraud-consumer] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-128C71FC, userId=1005, amount=1687.1039367624153
+2025-07-31T14:08:33.379+07:00  INFO 2015840 --- [fraud-consumer] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-0067F69C, userId=1003, amount=5210.849519994805
+2025-07-31T14:09:03.384+07:00  INFO 2015840 --- [fraud-consumer] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-594401FE, userId=1010, amount=8006.12040223794
+2025-07-31T14:09:33.390+07:00  INFO 2015840 --- [fraud-consumer] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-7C1F96AC, userId=1004, amount=3616.566023047615
+2025-07-31T14:10:03.398+07:00  INFO 2015840 --- [fraud-consumer] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-F54D9EB4, userId=1009, amount=375.7233792688384
+2025-07-31T14:10:33.402+07:00  INFO 2015840 --- [fraud-consumer] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-E60FF74C, userId=1001, amount=8839.995930272347
+2025-07-31T14:11:03.406+07:00  INFO 2015840 --- [fraud-consumer] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Processing transaction for fraud detection: orderId=ORDER-4D16CA5C, userId=1010, amount=1.4723414159900924E7
+2025-07-31T14:11:03.410+07:00  INFO 2015840 --- [fraud-consumer] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : Fraud alert created: alertId=4, orderId=ORDER-4D16CA5C, reason=High value transaction exceeds $10M threshold
+2025-07-31T14:11:03.410+07:00  WARN 2015840 --- [fraud-consumer] [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] c.e.fraud.service.FraudDetectionService  : FRAUD ALERT: High value transaction detected - orderId=ORDER-4D16CA5C, userId=1010, amount=$1.4723414159900924E7

@@ -1,0 +1,42 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+
+scrape_configs:
+  # Kafka Exporter
+  - job_name: 'kafka-exporter'
+    static_configs:
+      - targets: ['kafka-exporter:9308']
+
+  # Kafka JMX Metrics
+  - job_name: 'kafka-jmx'
+    static_configs:
+      - targets: ['kafka1:9991', 'kafka2:9992', 'kafka3:9993']
+
+  # Spring Boot Applications
+  - job_name: 'transaction-producer'
+    static_configs:
+      - targets: ['transaction-producer:8080']
+    metrics_path: '/actuator/prometheus'
+
+  - job_name: 'fraud-consumer'
+    static_configs:
+      - targets: ['fraud-consumer:8081']
+    metrics_path: '/actuator/prometheus'
+
+  - job_name: 'streams-analytics'
+    static_configs:
+      - targets: ['streams-analytics:8082']
+    metrics_path: '/actuator/prometheus'
+
+  - job_name: 'search-service'
+    static_configs:
+      - targets: ['search-service:8083']
+    metrics_path: '/actuator/prometheus'
+
+  # System monitoring
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']

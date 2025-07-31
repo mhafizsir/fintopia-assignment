@@ -1,0 +1,10 @@
+{
+  "type": "record",
+  "name": "InventoryEvent",
+  "namespace": "com.example.schema",
+  "fields": [
+    {"name": "productId", "type": "int"},
+    {"name": "change", "type": "int"},
+    {"name": "reason", "type": "string"}
+  ]
+}

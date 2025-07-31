@@ -1,0 +1,249 @@
+services:
+  # Zookeeper ensemble (3 nodes)
+  zookeeper1:
+    image: confluentinc/cp-zookeeper:7.4.0
+    hostname: zookeeper1
+    container_name: zookeeper1
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_SERVER_ID: 1
+      ZOOKEEPER_SERVERS: zookeeper1:2888:3888;zookeeper2:2888:3888;zookeeper3:2888:3888
+
+  zookeeper2:
+    image: confluentinc/cp-zookeeper:7.4.0
+    hostname: zookeeper2
+    container_name: zookeeper2
+    ports:
+      - "2182:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_SERVER_ID: 2
+      ZOOKEEPER_SERVERS: zookeeper1:2888:3888;zookeeper2:2888:3888;zookeeper3:2888:3888
+
+  zookeeper3:
+    image: confluentinc/cp-zookeeper:7.4.0
+    hostname: zookeeper3
+    container_name: zookeeper3
+    ports:
+      - "2183:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_SERVER_ID: 3
+      ZOOKEEPER_SERVERS: zookeeper1:2888:3888;zookeeper2:2888:3888;zookeeper3:2888:3888
+
+  # Kafka cluster (3 brokers)
+  kafka1:
+    image: confluentinc/cp-kafka:7.4.0
+    hostname: kafka1
+    container_name: kafka1
+    depends_on:
+      - zookeeper1
+      - zookeeper2
+      - zookeeper3
+    ports:
+      - "9092:9092"
+      - "9991:9991"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper1:2181,zookeeper2:2181,zookeeper3:2181'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka1:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 2
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 3
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      KAFKA_JMX_PORT: 9991
+      KAFKA_JMX_HOSTNAME: localhost
+
+  kafka2:
+    image: confluentinc/cp-kafka:7.4.0
+    hostname: kafka2
+    container_name: kafka2
+    depends_on:
+      - zookeeper1
+      - zookeeper2
+      - zookeeper3
+    ports:
+      - "9093:9093"
+      - "9992:9992"
+    environment:
+      KAFKA_BROKER_ID: 2
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper1:2181,zookeeper2:2181,zookeeper3:2181'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka2:29093,PLAINTEXT_HOST://localhost:9093
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 2
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 3
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      KAFKA_JMX_PORT: 9992
+      KAFKA_JMX_HOSTNAME: localhost
+
+  kafka3:
+    image: confluentinc/cp-kafka:7.4.0
+    hostname: kafka3
+    container_name: kafka3
+    depends_on:
+      - zookeeper1
+      - zookeeper2
+      - zookeeper3
+    ports:
+      - "9094:9094"
+      - "9993:9993"
+    environment:
+      KAFKA_BROKER_ID: 3
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper1:2181,zookeeper2:2181,zookeeper3:2181'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka3:29094,PLAINTEXT_HOST://localhost:9094
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 2
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 3
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      KAFKA_JMX_PORT: 9993
+      KAFKA_JMX_HOSTNAME: localhost
+
+  # Schema Registry
+  schema-registry:
+    image: confluentinc/cp-schema-registry:7.4.0
+    hostname: schema-registry
+    container_name: schema-registry
+    depends_on:
+      - kafka1
+      - kafka2
+      - kafka3
+    ports:
+      - "8081:8081"
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'kafka1:29092,kafka2:29093,kafka3:29094'
+      SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
+
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    hostname: mysql
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: ecommerce
+      MYSQL_USER: kafka
+      MYSQL_PASSWORD: kafka-pass
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./init-scripts:/docker-entrypoint-initdb.d
+    command: --server-id=1 --log-bin=mysql-bin --binlog-format=row --binlog-row-image=full
+
+  # Elasticsearch
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
+    hostname: elasticsearch
+    container_name: elasticsearch
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      - node.name=elasticsearch
+      - cluster.name=es-docker-cluster
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - xpack.security.enabled=false
+      - xpack.security.enrollment.enabled=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+
+  # Kafka Connect
+  kafka-connect:
+    image: confluentinc/cp-kafka-connect:7.4.0
+    hostname: kafka-connect
+    container_name: kafka-connect
+    depends_on:
+      - kafka1
+      - kafka2
+      - kafka3
+      - mysql
+      - elasticsearch
+      - schema-registry
+    ports:
+      - "8083:8083"
+    environment:
+      CONNECT_BOOTSTRAP_SERVERS: 'kafka1:29092,kafka2:29093,kafka3:29094'
+      CONNECT_REST_ADVERTISED_HOST_NAME: kafka-connect
+      CONNECT_GROUP_ID: kafka-connect-group
+      CONNECT_CONFIG_STORAGE_TOPIC: docker-connect-configs
+      CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 3
+      CONNECT_OFFSET_FLUSH_INTERVAL_MS: 10000
+      CONNECT_OFFSET_STORAGE_TOPIC: docker-connect-offsets
+      CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 3
+      CONNECT_STATUS_STORAGE_TOPIC: docker-connect-status
+      CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 3
+      CONNECT_KEY_CONVERTER: io.confluent.connect.avro.AvroConverter
+      CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+      CONNECT_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
+      CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+      CONNECT_PLUGIN_PATH: "/usr/share/java,/usr/share/confluent-hub-components"
+      CONNECT_LOG4J_LOGGERS: org.apache.zookeeper=ERROR,org.I0Itec.zkclient=ERROR,org.reflections=ERROR
+    volumes:
+      - ./connectors:/etc/kafka-connect/jars
+    command:
+      - bash
+      - -c
+      - |
+        confluent-hub install --no-prompt debezium/debezium-connector-mysql:2.4.0
+        confluent-hub install --no-prompt confluentinc/kafka-connect-elasticsearch:14.0.3
+        /etc/confluent/docker/run
+
+  # Prometheus
+  prometheus:
+    image: prom/prometheus:latest
+    hostname: prometheus
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--web.enable-lifecycle'
+
+  # Grafana
+  grafana:
+    image: grafana/grafana:latest
+    hostname: grafana
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: admin
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./config/grafana-datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
+
+  # Kafka Exporter (for Prometheus monitoring)
+  kafka-exporter:
+    image: danielqsj/kafka-exporter:latest
+    hostname: kafka-exporter
+    container_name: kafka-exporter
+    ports:
+      - "9308:9308"
+    command:
+      - --kafka.server=kafka1:29092
+      - --kafka.server=kafka2:29093
+      - --kafka.server=kafka3:29094
+
+volumes:
+  mysql-data:
+  elasticsearch-data:
+  prometheus-data:
+  grafana-data:

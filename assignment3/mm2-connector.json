@@ -1,0 +1,13 @@
+{
+  "name": "mm2-connector",
+  "config": {
+    "connector.class": "org.apache.kafka.connect.mirror.MirrorSourceConnector",
+    "tasks.max": "1",
+    "topics": "order-events,inventory-events",
+    "source.cluster.bootstrap.servers": "kafka:9092",
+    "target.cluster.bootstrap.servers": "backup-kafka:9092",
+    "groups": ".*",
+    "emit.checkpoints.enabled": "true",
+    "sync.topic.acls.enabled": "false"
+  }
+}

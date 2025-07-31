@@ -1,0 +1,9 @@
+com/ecommerce/fraud/FraudConsumerApplication.class
+com/ecommerce/avro/Transaction.class
+com/ecommerce/fraud/repository/FraudAlertRepository.class
+com/ecommerce/fraud/model/FraudAlert$InvestigationStatus.class
+com/ecommerce/fraud/service/FraudDetectionService.class
+com/ecommerce/fraud/model/FraudAlert.class
+com/ecommerce/fraud/controller/FraudController.class
+com/ecommerce/avro/Status.class
+com/ecommerce/avro/Transaction$Builder.class
